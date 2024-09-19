@@ -8,3 +8,14 @@ Repository authors:
 2. Charles M. Shobe, U.S. Forest Service Rocky Mountain Research Station
 
 Please cite this repository and/or paper if you use this code and/or data.
+
+# Contents
+
+This repository consists of data (.csv) and scripts (.py) to reproduce the following figures and accompanying statistical tests from Colaianne et al.:
+
+- Figure 7 (point-load rock strength index)
+- Figure 8 (bed thickness and fracture spacing)
+- Figure 9 (fracture orientation)
+- Figure 10 (cross-section survey data)
+- Figure 11 (cross-section hypsometry)
+- Figure 12 (cross-section roughness)
