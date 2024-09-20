@@ -20,7 +20,7 @@ import numpy as np
 from scipy.stats import kruskal, mannwhitneyu
 import scikit_posthocs
 
-all_breaks = pd.read_csv('strength_data.csv')
+all_breaks = pd.read_csv('../data/rock_strength/strength_data.csv')
 all_breaks = all_breaks[all_breaks['Is50MPa'] != '#VALUE!']
 all_breaks['Is50MPa'] = all_breaks['Is50MPa'].astype(float)
 
@@ -163,7 +163,7 @@ combined.text(0.75, 7.7, 'n = ' + str(len(carb)))
 combined.text(1.75, 7.7, 'n = ' + str(len(sandstone)))
 
 plt.tight_layout()
-fig.savefig('fig7_rock_strength.png', dpi=1000, bbox_inches = "tight")
+fig.savefig('../figures/fig7_rock_strength.png', dpi=1000, bbox_inches = "tight")
 
 #statistical testing
 kw = kruskal(c1['Is50MPa'], c2['Is50MPa'], c3['Is50MPa'], c4['Is50MPa'], coarse['Is50MPa'], fine['Is50MPa'])

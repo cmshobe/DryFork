@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-orientations = pd.read_csv('fracture_orientations.csv', delimiter = ',')
+orientations = pd.read_csv('../data/fracture_orientation/fracture_orientations.csv', delimiter = ',')
 orientations = orientations[:123] #cut out trailing NaNs
 
 #duplicate orientations but point them in the other direction
@@ -121,4 +121,4 @@ fine.set_title('Fine sandstone', fontsize = 16)
 
 plt.tight_layout()
 
-fig.savefig('fig9_fracture_orientation.png', dpi=1000, bbox_inches = 'tight')
+fig.savefig('../figures/fig9_fracture_orientation.png', dpi=1000, bbox_inches = 'tight')

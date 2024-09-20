@@ -21,7 +21,7 @@ from scipy.stats import kruskal, mannwhitneyu
 import scikit_posthocs
 
 #import and analyze bed thickness data
-beds = pd.read_csv('bedding_thickness.csv', delimiter = ',', 
+beds = pd.read_csv('../data/bed_and_fracture_spacing/bedding_thickness.csv', delimiter = ',', 
                    encoding = 'UTF-8')
 beds = beds[:25] #cut out trailing NaNs
 
@@ -31,7 +31,7 @@ beds_coarse_mean = beds.mean(skipna = True).iloc[1]
 beds_carb_mean = beds.mean(skipna = True).iloc[2]
 
 #import and analyze fracture spacing data
-fractures = pd.read_csv('fracture_spacing.csv', delimiter = ',', 
+fractures = pd.read_csv('../data/bed_and_fracture_spacing/fracture_spacing.csv', delimiter = ',', 
                         encoding = 'UTF-8')*100 #convert m to cm
 
 fractures_fine_mean = fractures.mean(skipna = True).iloc[0]
@@ -100,7 +100,7 @@ ax.text(39.5, 148, 'T', fontsize = 14)
 ax.text(39.5, 285, 'B', fontsize = 14)
 
 plt.tight_layout()
-fig.savefig('fig8_beds_fractures.png', dpi=1000, bbox_inches = 'tight')
+fig.savefig('../figures/fig8_beds_fractures.png', dpi=1000, bbox_inches = 'tight')
 
 #statistical testing: bed thickness
 beds_fine = beds['Fine'][0:17]
