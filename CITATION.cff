@@ -17,7 +17,7 @@ preferred-citation:
   authors:
   - family-names: "Colaianne"
     given-names: "Nicholas J."
-    orcid: ""
+    orcid: "https://orcid.org/0009-0002-2539-0300"
   - family-names: "Shobe"
     given-names: "Charles M."
     orcid: "https://orcid.org/0000-0003-3015-1283"
@@ -36,6 +36,6 @@ preferred-citation:
   start:  # First page number
   end:  # Last page number
   title: "Beyond boundaries: Depositional environment controls on erodibility, process, and form in rivers incising sedimentary bedrock"
-  issue: 1
-  volume: 1
-  year: 2021
+  issue: 
+  volume: 
+  year: 2025
