@@ -1,6 +1,8 @@
 # DryFork
 Data and scripts to accompany Colaianne et al. (in revision for *Geosphere*; resubmitted September 2024).
 
+[![DOI](https://zenodo.org/badge/860124239.svg)](https://zenodo.org/doi/10.5281/zenodo.13820450)
+
 Colaianne, N.J., Shobe, C.M., Moler, J., Benison, K.C., and Chilton, K.D. (in revision) Beyond boundaries: Depositional environment controls on erodibility, process, and form in rivers incising sedimentary bedrock. *Geosphere*.
 
 Repository authors: 
