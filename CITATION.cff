@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this data/code, please cite it as below."
+authors:
+- family-names: "Colaianne"
+  given-names: "Nicholas J."
+  orcid: ""
+- family-names: "Shobe"
+  given-names: "Charles M."
+  orcid: "https://orcid.org/0000-0003-3015-1283"
+title: "DryFork"
+version: 1.0
+doi: 
+date-released: 2024-10-01
+url: "https://github.com/cmshobe/DryFork"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Colaianne"
+    given-names: "Nicholas J."
+    orcid: ""
+  - family-names: "Shobe"
+    given-names: "Charles M."
+    orcid: "https://orcid.org/0000-0003-3015-1283"
+  - family-names: "Moler"
+    given-names: "Joseph"
+    orcid: ""
+  - family-names: "Benison"
+    given-names: "Kathleen C."
+    orcid: "https://orcid.org/0000-0001-6104-2333"
+  - family-names: "Chilton"
+    given-names: "Kristin D."
+    orcid: "https://orcid.org/0000-0003-3736-4417"
+  doi: ""
+  journal: "Geosphere"
+  month: 
+  start:  # First page number
+  end:  # Last page number
+  title: "My awesome research software"
+  issue: 1
+  volume: 1
+  year: 2021
