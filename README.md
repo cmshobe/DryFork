@@ -23,8 +23,19 @@ This repository consists of data (.csv) and scripts (.py) to reproduce the follo
 
 ## data folder
 ### bed_and_fracture_spacing folder
+- bedding_thickness.csv
+- fracture_spacing.csv
 
-##figures folder
+### cross_section_form folder
+- one .csv file for each of the 30 cross-section surveys
+
+### fracture_orientation folder
+- fracture_orientations.csv
+
+### rock_strength folder
+- strength_data.csv
+
+## figures folder
 - Figure 7 (point-load rock strength index)
 - Figure 8 (bed thickness and fracture spacing)
 - Figure 9 (fracture orientation)
