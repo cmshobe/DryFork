@@ -80,7 +80,7 @@ spacings = np.array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,
 #create data structure to hold output: n_spacings x n_dfs
 inflection_data = np.zeros((len(spacings), 30))
 
-dx = 0.01
+dx = 0.1
 
 for j in range(len(spacings)):
     #iterate through the 30 cross-sections, calculating the number of inflection points in each one (at a given resampling scale)

@@ -81,39 +81,28 @@ save_carb_elevs_uniform_banks = np.array([])
 save_coarse_elevs_uniform_banks = np.array([])
 save_fine_elevs_uniform_banks = np.array([])
 
-#interpolate cross-sections to dx resolution, then resample to sample_spacing
-
-dx = 0.01
+#interpolate cross-sections to dx resolution
+dx = 0.1
 
 for i in range(len(list_of_dfs)):
     df = list_of_dfs[i]
     xnew, znew = densify_xs(df, dx)
-    
-    #sample densified xs at known spacing
-    sample_spacing = 0.1 #m
-    factor = 100
-    sample_spacing *= factor
-    xnew *= factor
-    sampled_x = xnew[xnew % sample_spacing == 0]
-    sampled_x /= factor
-    
-    sampled_z = znew[xnew % sample_spacing == 0]
 
     #decimate to cut out bank elevations that were not surveyed on both banks
     if i == 20:
-        sampled_z_uniform_banks = sampled_z[sampled_z < np.minimum(sampled_z[1], sampled_z[-1])]
+        sampled_z_uniform_banks = znew[znew < np.minimum(znew[1], znew[-1])]
     else:
-        sampled_z_uniform_banks = sampled_z[sampled_z < np.minimum(sampled_z[0], sampled_z[-1])]
+        sampled_z_uniform_banks = znew[znew < np.minimum(znew[0], znew[-1])]
 
     
     if i < 10: #data is carbonate
-        save_carb_elevs = np.concatenate((save_carb_elevs, sampled_z))
+        save_carb_elevs = np.concatenate((save_carb_elevs, znew))
         save_carb_elevs_uniform_banks = np.concatenate((save_carb_elevs_uniform_banks, sampled_z_uniform_banks))
     elif (i >= 10) and (i < 20):
-        save_coarse_elevs = np.concatenate((save_coarse_elevs, sampled_z))
+        save_coarse_elevs = np.concatenate((save_coarse_elevs, znew))
         save_coarse_elevs_uniform_banks = np.concatenate((save_coarse_elevs_uniform_banks, sampled_z_uniform_banks))
     elif i >= 20:
-        save_fine_elevs = np.concatenate((save_fine_elevs, sampled_z))
+        save_fine_elevs = np.concatenate((save_fine_elevs, znew))
         save_fine_elevs_uniform_banks = np.concatenate((save_fine_elevs_uniform_banks, sampled_z_uniform_banks))
     else:
         print('no condition satisfied! check code')
@@ -158,8 +147,8 @@ fig2.savefig('../figures/fig11_xs_hypsometry.png', dpi = 1000, bbox_inches = 'ti
 
 
 #statistical testing to assess whether distributions differ among rock units
-kw = kruskal(save_carb_elevs, save_coarse_elevs, save_fine_elevs)
-dunns = scikit_posthocs.posthoc_dunn([save_carb_elevs, save_coarse_elevs, save_fine_elevs], p_adjust = 'bonferroni')
+kw = kruskal(save_carb_elevs_uniform_banks, save_coarse_elevs_uniform_banks, save_fine_elevs_uniform_banks)
+dunns = scikit_posthocs.posthoc_dunn([save_carb_elevs_uniform_banks, save_coarse_elevs_uniform_banks, save_fine_elevs_uniform_banks], p_adjust = 'bonferroni')
 
 #combine coarse and fine sandstone data to assess carbonate versus sandstone
 all_ss_elevs_uniform_banks = np.concatenate((save_coarse_elevs_uniform_banks, save_fine_elevs_uniform_banks), axis = 0)
