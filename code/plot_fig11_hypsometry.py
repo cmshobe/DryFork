@@ -147,7 +147,6 @@ fig2.savefig('../figures/fig11_xs_hypsometry.png', dpi = 1000, bbox_inches = 'ti
 fig2.savefig('../figures/fig11_xs_hypsometry.pdf', dpi = 1000, bbox_inches = 'tight')
 
 
-
 #statistical testing to assess whether distributions differ among rock units
 kw = kruskal(save_carb_elevs_uniform_banks, save_coarse_elevs_uniform_banks, save_fine_elevs_uniform_banks)
 dunns = scikit_posthocs.posthoc_dunn([save_carb_elevs_uniform_banks, save_coarse_elevs_uniform_banks, save_fine_elevs_uniform_banks], p_adjust = 'bonferroni')

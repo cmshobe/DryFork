@@ -76,6 +76,7 @@ list_of_dfs = list_of_dfs_carb + list_of_dfs_coarse + list_of_dfs_fine
 for df in list_of_dfs:
     if df['Position'].is_monotonic_increasing == False:
         df.sort_values('Position', inplace = True)
+        df.reset_index(drop = True, inplace = True)
 
 #interpolate cross-sections to dx resolution, then resample to 
 #a number of different sample_spacings, finding inflection points each time

@@ -68,6 +68,7 @@ list_of_dfs = list_of_dfs_carb + list_of_dfs_coarse + list_of_dfs_fine
 for df in list_of_dfs:
     if df['Position'].is_monotonic_increasing == False:
         df.sort_values('Position', inplace = True)
+        df.reset_index(drop = True, inplace = True)
 
 #create Figure 10: all channel cross-sections#################################
 
