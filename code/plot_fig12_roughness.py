@@ -65,20 +65,25 @@ coarse8 = pd.read_csv(path + 'DFSSC_8.csv')
 coarse9 = pd.read_csv(path + 'DFSSC_9.csv')
 coarse10 = pd.read_csv(path + 'DFSSC_10.csv')
 
-list_of_dfs_carb = [carb1, carb2, carb3, carb4, carb5, carb6, carb7, carb8, carb9, carb10]
-list_of_dfs_coarse = [coarse1, coarse2, coarse3, coarse4, coarse5, coarse6, coarse7, coarse8, coarse9, coarse10]
-list_of_dfs_fine = [fine1, fine2, fine3, fine4, fine5, fine6, fine7, fine8, fine9, fine10]
+list_of_dfs_carb = [carb1, carb2, carb3, carb4, carb5, 
+                    carb6, carb7, carb8, carb9, carb10]
+list_of_dfs_coarse = [coarse1, coarse2, coarse3, coarse4, coarse5, 
+                      coarse6, coarse7, coarse8, coarse9, coarse10]
+list_of_dfs_fine = [fine1, fine2, fine3, fine4, fine5, 
+                    fine6, fine7, fine8, fine9, fine10]
 list_of_dfs = list_of_dfs_carb + list_of_dfs_coarse + list_of_dfs_fine
+
+for df in list_of_dfs:
+    if df['Position'].is_monotonic_increasing == False:
+        df.sort_values('Position', inplace = True)
 
 #interpolate cross-sections to dx resolution, then resample to 
 #a number of different sample_spacings, finding inflection points each time
 
 #iterate through resampling scales (will be x-axis of plot ultimately)
 spacings = np.array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,  
-                     1., 1.5, 2., 2.5, 3., 3.5, 4., 4.5, 5., 5.5, 6., 6.5, 7., 7.5, 8., 8.5, 9., 9.5, 10.])
-
-#spacings = np.array([0.1, 0.3])
-
+                     1., 1.5, 2., 2.5, 3., 3.5, 4., 4.5, 5., 5.5, 6., 6.5, 7., 
+                     7.5, 8., 8.5, 9., 9.5, 10.])
 
 #create data structure to hold output: n_spacings x n_dfs
 inflection_data = np.zeros((len(spacings), len(list_of_dfs)))
@@ -86,7 +91,8 @@ inflection_data = np.zeros((len(spacings), len(list_of_dfs)))
 dx = 0.1
 
 for j in range(len(spacings)):
-    #iterate through the 30 cross-sections, calculating the number of inflection points in each one (at a given resampling scale)
+    #iterate through the 30 cross-sections, calculating the number of inflection 
+    #points in each one (at a given resampling scale)
     for i in range(len(list_of_dfs)):
         sample_spacing = spacings[j]
         df = list_of_dfs[i]
@@ -110,10 +116,9 @@ for j in range(len(spacings)):
 xs_lengths = np.zeros(30)
 iter = 0
 for df in list_of_dfs:
-    if df.loc[0, 'Position'] > 0:
-        df = df[::-1].reset_index(drop=True)
     xs_lengths[iter] = df.loc[df.index[-1], 'Position']
     iter += 1
+    
 inflection_frequency = np.divide(inflection_data, xs_lengths)
 
 carb_averages_raw = np.mean(inflection_data[:, 0:10], axis = 1)
@@ -132,23 +137,32 @@ fig, axs = plt.subplots(1, 1, figsize = (6, 4.5))
 edgecolor = matplotlib.colors.ColorConverter().to_rgba('k', alpha=0.2)
 markersize = 100
 
-carb_facecolor = matplotlib.colors.ColorConverter().to_rgba('lightblue', alpha = 0.2)
+carb_facecolor = matplotlib.colors.ColorConverter().to_rgba('lightblue', 
+                                                            alpha = 0.2)
 carb_zorder = 5
 
 
-coarse_facecolor = matplotlib.colors.ColorConverter().to_rgba('moccasin', alpha = 0.2)
+coarse_facecolor = matplotlib.colors.ColorConverter().to_rgba('moccasin', 
+                                                              alpha = 0.2)
 coarse_zorder = 4
 
 
-fine_facecolor = matplotlib.colors.ColorConverter().to_rgba('moccasin', alpha = 0.2)
+fine_facecolor = matplotlib.colors.ColorConverter().to_rgba('moccasin', 
+                                                            alpha = 0.2)
 fine_alpha = 0.5
 fine_zorder = 3
 
 averages = axs
 
-averages.scatter(spacings, carb_averages, s = 100, color = carb_facecolor, marker = '^', alpha = 1., edgecolor = 'k', zorder = 3, label = 'Carbonate', clip_on = False)
-averages.scatter(spacings, coarse_averages, s = 100, color = coarse_facecolor, marker = 'o', alpha = 1., edgecolor = 'k', zorder = 3, label = 'Coarse sandstone', clip_on = False)
-averages.scatter(spacings, fine_averages, s = 100, color = fine_facecolor, marker = 's', alpha = 1., edgecolor = 'k', zorder = 3, label = 'Fine sandstone', clip_on = False)
+averages.scatter(spacings, carb_averages, s = 100, color = carb_facecolor, 
+                 marker = '^', alpha = 1., edgecolor = 'k', zorder = 3, 
+                 label = 'Carbonate', clip_on = False)
+averages.scatter(spacings, coarse_averages, s = 100, color = coarse_facecolor, 
+                 marker = 'o', alpha = 1., edgecolor = 'k', zorder = 3, 
+                 label = 'Coarse sandstone', clip_on = False)
+averages.scatter(spacings, fine_averages, s = 100, color = fine_facecolor, 
+                 marker = 's', alpha = 1., edgecolor = 'k', zorder = 3, 
+                 label = 'Fine sandstone', clip_on = False)
 
 averages.text(-1.7, 0.23, 'rougher' '\n' 'boundary', style = 'italic')
 averages.text(-1.7, 0.0, 'smoother' '\n' 'boundary', style = 'italic')
@@ -158,13 +172,17 @@ averages.set_xlabel('Sampling interval [m]', fontsize = 16)
 averages.set_ylabel('Inflection frequency [m$^{-1}$]', fontsize = 16)
 
 handles, labels = averages.get_legend_handles_labels()
-averages.legend(handles[::-1], labels[::-1], loc='upper right', edgecolor = 'k')
+averages.legend(handles[::-1], labels[::-1], loc='upper right', 
+                edgecolor = 'k')
 
 averages.set_xlim(0, 10)
 
 averages.axvspan(0.2, 3, alpha = 0.5, color = 'gray')
-averages.text(1, 0.02, 'typical' + '\n' 'surveyed' + '\n' + 'point' + '\n' + 'spacing')
+averages.text(1, 0.02, 
+              'typical' + '\n' 'surveyed' + '\n' + 'point' + '\n' + 'spacing')
 
 plt.tight_layout()
-fig.savefig('../figures/fig12_xs_roughness.png', dpi = 1000, bbox_inches = 'tight')
-fig.savefig('../figures/fig12_xs_roughness.pdf', dpi = 1000, bbox_inches = 'tight')
+fig.savefig('../figures/fig12_xs_roughness.png', dpi = 1000, 
+            bbox_inches = 'tight')
+fig.savefig('../figures/fig12_xs_roughness.pdf', dpi = 1000, 
+            bbox_inches = 'tight')
