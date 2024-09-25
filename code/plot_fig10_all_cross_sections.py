@@ -57,6 +57,18 @@ coarse8 = pd.read_csv(path + 'DFSSC_8.csv')
 coarse9 = pd.read_csv(path + 'DFSSC_9.csv')
 coarse10 = pd.read_csv(path + 'DFSSC_10.csv')
 
+list_of_dfs_carb = [carb1, carb2, carb3, carb4, carb5, 
+                    carb6, carb7, carb8, carb9, carb10]
+list_of_dfs_coarse = [coarse1, coarse2, coarse3, coarse4, coarse5, 
+                      coarse6, coarse7, coarse8, coarse9, coarse10]
+list_of_dfs_fine = [fine1, fine2, fine3, fine4, fine5, 
+                    fine6, fine7, fine8, fine9, fine10]
+list_of_dfs = list_of_dfs_carb + list_of_dfs_coarse + list_of_dfs_fine
+
+for df in list_of_dfs:
+    if df['Position'].is_monotonic_increasing == False:
+        df.sort_values('Position', inplace = True)
+
 #create Figure 10: all channel cross-sections#################################
 
 #plot only some of the XSs
