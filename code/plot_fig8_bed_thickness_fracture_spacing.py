@@ -101,6 +101,8 @@ ax.text(39.5, 285, 'B', fontsize = 14)
 
 plt.tight_layout()
 fig.savefig('../figures/fig8_beds_fractures.png', dpi=1000, bbox_inches = 'tight')
+fig.savefig('../figures/fig8_beds_fractures.pdf', dpi=1000, bbox_inches = 'tight')
+
 
 #statistical testing: bed thickness
 beds_fine = beds['Fine'][0:17]

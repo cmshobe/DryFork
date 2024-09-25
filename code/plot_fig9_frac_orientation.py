@@ -122,3 +122,4 @@ fine.set_title('Fine sandstone', fontsize = 16)
 plt.tight_layout()
 
 fig.savefig('../figures/fig9_fracture_orientation.png', dpi=1000, bbox_inches = 'tight')
+fig.savefig('../figures/fig9_fracture_orientation.pdf', dpi=1000, bbox_inches = 'tight')

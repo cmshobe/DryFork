@@ -144,6 +144,8 @@ ax3.set(yticklabels=[])
 ax1.set_ylabel('Elevation above thalweg [m]', fontsize = 16)
 plt.tight_layout()
 fig2.savefig('../figures/fig11_xs_hypsometry.png', dpi = 1000, bbox_inches = 'tight')
+fig2.savefig('../figures/fig11_xs_hypsometry.pdf', dpi = 1000, bbox_inches = 'tight')
+
 
 
 #statistical testing to assess whether distributions differ among rock units

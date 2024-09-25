@@ -147,3 +147,4 @@ axcarb.set_xlabel('Distance [m]', fontsize = 16)
 axcarb.xaxis.set_label_coords(1.5,-0.5)
 
 fig.savefig('../figures/fig10_all_XSs.png', dpi=1000, bbox_inches = 'tight')
+fig.savefig('../figures/fig10_all_XSs.pdf', dpi=1000, bbox_inches = 'tight')

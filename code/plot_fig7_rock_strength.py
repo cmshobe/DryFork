@@ -164,6 +164,8 @@ combined.text(1.75, 7.7, 'n = ' + str(len(sandstone)))
 
 plt.tight_layout()
 fig.savefig('../figures/fig7_rock_strength.png', dpi=1000, bbox_inches = "tight")
+fig.savefig('../figures/fig7_rock_strength.pdf', dpi=1000, bbox_inches = "tight")
+
 
 #statistical testing
 kw = kruskal(c1['Is50MPa'], c2['Is50MPa'], c3['Is50MPa'], c4['Is50MPa'], coarse['Is50MPa'], fine['Is50MPa'])

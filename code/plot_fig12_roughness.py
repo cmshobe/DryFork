@@ -77,8 +77,11 @@ list_of_dfs = list_of_dfs_carb + list_of_dfs_coarse + list_of_dfs_fine
 spacings = np.array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,  
                      1., 1.5, 2., 2.5, 3., 3.5, 4., 4.5, 5., 5.5, 6., 6.5, 7., 7.5, 8., 8.5, 9., 9.5, 10.])
 
+#spacings = np.array([0.1, 0.3])
+
+
 #create data structure to hold output: n_spacings x n_dfs
-inflection_data = np.zeros((len(spacings), 30))
+inflection_data = np.zeros((len(spacings), len(list_of_dfs)))
 
 dx = 0.1
 
@@ -93,14 +96,14 @@ for j in range(len(spacings)):
         factor = 100
         sample_spacing *= factor
         xnew *= factor
-        sampled_x = xnew[xnew % sample_spacing == 0]
+        sampled_x = xnew[np.isclose(xnew % sample_spacing, 0, atol=1e-3)]
         sampled_x /= factor
         
-        sampled_z = znew[xnew % sample_spacing == 0]
-        
+        sampled_z = znew[np.isclose(xnew % sample_spacing, 0, atol=1e-3)]
         
         # find inflection points
         infls = np.where(np.diff(np.sign(np.diff(sampled_z))) != 0)[0]
+        infls += 1
 
         inflection_data[j, i] = len(infls)
 
@@ -159,8 +162,9 @@ averages.legend(handles[::-1], labels[::-1], loc='upper right', edgecolor = 'k')
 
 averages.set_xlim(0, 10)
 
-averages.axvspan(0.2, 2.5, alpha = 0.5, color = 'gray')
-averages.text(0.75, 0.02, 'typical' + '\n' 'surveyed' + '\n' + 'point' + '\n' + 'spacing')
+averages.axvspan(0.2, 3, alpha = 0.5, color = 'gray')
+averages.text(1, 0.02, 'typical' + '\n' 'surveyed' + '\n' + 'point' + '\n' + 'spacing')
 
 plt.tight_layout()
 fig.savefig('../figures/fig12_xs_roughness.png', dpi = 1000, bbox_inches = 'tight')
+fig.savefig('../figures/fig12_xs_roughness.pdf', dpi = 1000, bbox_inches = 'tight')
